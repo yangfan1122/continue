@@ -13,8 +13,8 @@ import {
   type CodebaseIndex,
 } from "../types.js";
 
-import { chunkDocument, shouldChunk } from "./chunk.js";
 import { getUriPathBasename } from "../../util/uri.js";
+import { chunkDocument, shouldChunk } from "./chunk.js";
 
 export class ChunkCodebaseIndex implements CodebaseIndex {
   relativeExpectedTime: number = 1;
@@ -163,6 +163,7 @@ export class ChunkCodebaseIndex implements CodebaseIndex {
   }
 
   private async packToChunks(pack: PathAndCacheKey): Promise<Chunk[]> {
+    console.log('pack.path:', pack.path)
     const contents = await this.readFile(pack.path);
     if (!shouldChunk(pack.path, contents)) {
       return [];
